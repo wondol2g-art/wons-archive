@@ -1,0 +1,110 @@
+/* WONS ARCHIVE — warm minimal editorial */
+:root {
+  --paper: #f4f0e8;
+  --ink: #292923;
+  --muted: #8a877e;
+  --line: #dcd6ca;
+  --serif: Georgia, "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "DM Sans", "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.site-header {
+  height: 82px; padding: 0 6.2vw; display: flex; align-items: center;
+  justify-content: space-between; border-bottom: 1px solid var(--line);
+}
+.wordmark { font-size: 15px; font-weight: 600; letter-spacing: .13em; white-space: nowrap; }
+.wordmark span { font-weight: 400; }
+nav { display: flex; gap: 34px; }
+nav a, .eyebrow, .text-link, .site-footer p, .back-top {
+  font-size: 10px; letter-spacing: .15em; font-weight: 500;
+}
+nav a { transition: opacity .2s; }
+nav a:hover, .text-link:hover, .back-top:hover { opacity: .55; }
+.menu-toggle { display: none; border: 0; background: none; font-size: 20px; color: var(--ink); }
+.intro { padding: 105px 12vw 92px; }
+.eyebrow { color: var(--muted); margin: 0 0 25px; }
+h1, h2, p { margin-top: 0; }
+.intro h1 {
+  font-size: clamp(54px, 8.2vw, 116px); line-height: .98;
+  letter-spacing: -.075em; font-weight: 400; margin: 0;
+}
+h1 em, h2 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.055em; }
+.intro-bottom {
+  display: flex; justify-content: space-between; align-items: end;
+  margin-top: 58px; max-width: 850px;
+}
+.intro-bottom p { font-family: "Noto Sans KR", sans-serif; font-size: 13px; line-height: 1.9; color: #6f6c64; margin: 0; }
+.text-link { border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+.text-link span { margin-left: 12px; font-size: 15px; }
+.work-section { padding: 65px 6.2vw 120px; border-top: 1px solid var(--line); }
+.section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 36px; }
+.section-heading .eyebrow { margin-bottom: 13px; }
+.section-heading h2 { font-size: 28px; font-weight: 400; letter-spacing: -.05em; margin: 0; }
+.section-heading h2 span { font-size: 12px; color: var(--muted); vertical-align: top; margin-left: 5px; }
+.section-note { color: var(--muted); font: 11px/1.7 var(--serif); text-align: right; margin: 0; }
+.gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 46px 18px; }
+.photo-card { border: 0; padding: 0; background: transparent; color: inherit; text-align: left; cursor: zoom-in; }
+.photo-card:nth-child(1), .photo-card:nth-child(4) { grid-column: span 7; }
+.photo-card:nth-child(2), .photo-card:nth-child(5) { grid-column: span 5; margin-top: 95px; }
+.photo-card:nth-child(3), .photo-card:nth-child(6) { grid-column: span 6; }
+.photo-frame { display: block; overflow: hidden; background: #e5dfd3; aspect-ratio: 4 / 3; }
+.photo-card:nth-child(2) .photo-frame, .photo-card:nth-child(5) .photo-frame { aspect-ratio: 4 / 5; }
+.photo-frame img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.photo-card:hover img { transform: scale(1.035); }
+.photo-meta { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; }
+.photo-title { font-size: 12px; letter-spacing: .02em; }
+.photo-location { font-size: 10px; color: var(--muted); letter-spacing: .08em; }
+.about-section {
+  border-top: 1px solid var(--line); padding: 78px 12vw 110px;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 7vw;
+}
+.about-label { display: flex; flex-direction: column; justify-content: space-between; }
+.about-label .eyebrow { margin: 0; }
+.about-label span { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+.about-copy h2 { font-size: clamp(38px, 5vw, 65px); line-height: 1.05; font-weight: 400; letter-spacing: -.07em; margin: 0 0 28px; }
+.about-copy > p { max-width: 480px; font: 13px/2 "Noto Sans KR", sans-serif; color: #6f6c64; }
+.about-copy .about-small { margin-top: 30px; font: 10px "DM Sans", sans-serif; letter-spacing: .1em; }
+.site-footer {
+  min-height: 90px; border-top: 1px solid var(--line); padding: 25px 6.2vw;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.site-footer p { color: var(--muted); margin: 0; font-size: 9px; }
+.back-top { font-size: 9px; }
+.lightbox { border: 0; padding: 42px 56px; max-width: min(94vw, 1200px); max-height: 94vh; background: var(--paper); color: var(--ink); }
+.lightbox::backdrop { background: rgba(24, 23, 20, .88); }
+.lightbox figure { margin: 0; text-align: center; }
+.lightbox img { max-width: 100%; max-height: 78vh; object-fit: contain; display: block; margin: auto; }
+.lightbox figcaption { font-size: 11px; letter-spacing: .08em; color: var(--muted); padding-top: 14px; }
+.lightbox button { position: absolute; border: 0; background: none; color: var(--ink); cursor: pointer; font-size: 25px; }
+.lightbox-close { top: 8px; right: 16px; }
+.lightbox-prev { left: 12px; top: 50%; }
+.lightbox-next { right: 12px; top: 50%; }
+@media (max-width: 700px) {
+  .site-header { height: 68px; padding: 0 6vw; }
+  nav { display: none; position: absolute; z-index: 3; top: 68px; left: 0; right: 0; padding: 22px 6vw; background: var(--paper); border-bottom: 1px solid var(--line); }
+  nav.open { display: flex; justify-content: space-between; gap: 12px; }
+  .menu-toggle { display: block; }
+  .intro { padding: 85px 7vw 70px; }
+  .intro h1 { font-size: clamp(52px, 14vw, 82px); }
+  .intro-bottom { align-items: start; flex-direction: column; gap: 28px; margin-top: 38px; }
+  .work-section { padding: 55px 6vw 75px; }
+  .section-heading { align-items: start; }
+  .section-note { display: none; }
+  .gallery { grid-template-columns: 1fr 1fr; gap: 30px 12px; }
+  .photo-card:nth-child(n) { grid-column: span 1; margin-top: 0; }
+  .photo-card:nth-child(2n) { margin-top: 48px; }
+  .photo-frame, .photo-card:nth-child(2) .photo-frame, .photo-card:nth-child(5) .photo-frame { aspect-ratio: 3 / 4; }
+  .photo-meta { flex-direction: column; gap: 5px; }
+  .about-section { padding: 60px 7vw 75px; grid-template-columns: 1fr; gap: 48px; }
+  .about-label span { display: none; }
+  .about-copy h2 { font-size: 48px; }
+  .site-footer { padding: 25px 6vw; flex-wrap: wrap; }
+  .site-footer p { order: 3; width: 100%; }
+  .lightbox { padding: 40px 28px; }
+}
