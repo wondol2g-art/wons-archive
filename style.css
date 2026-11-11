@@ -121,3 +121,7 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 400; letter-spacing: -.05
 .photo-frame img { height:auto; aspect-ratio:auto; object-fit:contain; }
 @media(max-width:700px){.photo-card:nth-child(n){grid-column:span 1;margin-top:0}.photo-card:nth-child(2n){margin-top:35px}.photo-frame img{height:auto;aspect-ratio:auto}.filters{gap:4px 15px;margin-bottom:26px}.filter-button{font-size:9px}}
 @media(max-width:440px){.gallery{grid-template-columns:1fr}.photo-card:nth-child(n){margin-top:0}.photo-meta{flex-direction:row}}
+
+/* Portfolio cover */
+.cover-hero { background: #0d171c; display: flex; justify-content: center; overflow: hidden; }
+.cover-hero img { display: block; width: 100%; max-height: 92vh; object-fit: contain; }
