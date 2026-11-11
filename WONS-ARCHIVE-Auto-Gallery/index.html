@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta name="description" content="WONS ARCHIVE — A personal collection of photographs by Wons.">
+  <title>WONS ARCHIVE — Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Wons Archive home">WONS <span>ARCHIVE</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#work">WORK</a>
+      <a href="#about">ABOUT</a>
+      <a href="#about">CONTACT</a>
+    </nav>
+    <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+  </header>
+
+  <main id="top">
+    <section class="cover-hero" aria-label="WONS ARCHIVE 표지">
+      <img src="images/cover.png" alt="WONS ARCHIVE photography portfolio cover" fetchpriority="high">
+    </section>
+    <section class="intro">
+      <p class="eyebrow">PHOTOGRAPHY · EST. 2026</p>
+      <h1>Quiet moments,<br><em>kept forever.</em></h1>
+      <div class="intro-bottom">
+        <p>일상과 여행의 장면을 천천히 기록합니다.<br>빛, 풍경, 그리고 그날의 작은 순간들.</p>
+        <a class="text-link" href="#work">EXPLORE THE ARCHIVE <span>↘</span></a>
+      </div>
+    </section>
+
+    <section class="work-section" id="work">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SELECTED PHOTOGRAPHS</p>
+          <h2>Selected works <span>(17)</span></h2>
+        </div>
+        <p class="section-note">A collection of places<br>and passing moments.</p>
+      </div>
+      <div class="filters" id="filters" aria-label="사진 카테고리"></div>
+      <div class="gallery" id="gallery" aria-label="사진 갤러리"></div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="about-label">
+        <p class="eyebrow">A LITTLE ABOUT ME</p>
+        <span>01 / 01</span>
+      </div>
+      <div class="about-copy">
+        <h2>Looking closer.<br><em>Remembering more.</em></h2>
+        <p>WONS ARCHIVE는 사진으로 모아 둔 작은 기록 보관소입니다. 익숙한 거리와 낯선 여행지, 스쳐 지나가는 빛의 순간을 담습니다.</p>
+        <p class="about-small">Based in Korea · Available for collaborations</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="#top">WONS <span>ARCHIVE</span></a>
+    <p>© <span id="year"></span> WONS ARCHIVE. ALL MOMENTS RESERVED.</p>
+    <a href="#top" class="back-top">BACK TO TOP ↑</a>
+  </footer>
+
+  <dialog class="lightbox" id="lightbox" aria-label="사진 크게 보기">
+    <button class="lightbox-close" aria-label="닫기">×</button>
+    <button class="lightbox-prev" aria-label="이전 사진">←</button>
+    <figure><img src="" alt=""><figcaption></figcaption></figure>
+    <button class="lightbox-next" aria-label="다음 사진">→</button>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
