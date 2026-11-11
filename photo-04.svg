@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b6a18d"/><stop offset="1" stop-color="#e5d6c4"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#g)"/>
+<circle cx="610" cy="270" r="115" fill="#f4f0e8" opacity=".32"/>
+<path d="M0 498 Q260 468 520 548 T1200 576 V900 H0Z" fill="#555c55" opacity=".24"/>
+<path d="M0 640 Q340 592 650 676 T1200 680 V900 H0Z" fill="#343b38" opacity=".18"/>
+<text x="70" y="790" fill="#fffaf0" font-family="Arial,sans-serif" font-size="22" letter-spacing="8" opacity=".8">BETWEEN SEASONS</text>
+<text x="70" y="845" fill="#fffaf0" font-family="Georgia,serif" font-size="34" opacity=".8">04 / WONS ARCHIVE</text>
+</svg>
