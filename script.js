@@ -1,5 +1,5 @@
 // 사진 목록: 이미지 파일명과 제목/장소를 원하는 내용으로 바꿔주세요.
-const photos = [
+const originalPhotos = [
   {
     "src": "images/photo-01.webp",
     "title": "A moment of stillness",
@@ -104,66 +104,48 @@ const photos = [
   }
 ];
 
-const gallery = document.querySelector("#gallery");
-const lightbox = document.querySelector("#lightbox");
-let current = 0;
+// 공개 GitHub 저장소의 images 폴더를 읽어 새 사진을 자동으로 찾아냅니다.
 
-let visiblePhotos = photos;
-const filters = document.querySelector("#filters");
-const categories = ["ALL", "LIGHT & SHADOW", "CITY & MOMENTS", "LANDSCAPE", "TRAVEL & PLACES"];
-categories.forEach(category => {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.textContent = category;
-  button.className = "filter-button" + (category === "ALL" ? " active" : "");
-  button.setAttribute("aria-pressed", String(category === "ALL"));
-  button.addEventListener("click", () => {
-    filters.querySelectorAll("button").forEach(b => {b.classList.remove("active"); b.setAttribute("aria-pressed", "false");});
-    button.classList.add("active"); button.setAttribute("aria-pressed", "true");
-    visiblePhotos = category === "ALL" ? photos : photos.filter(p => p.category === category);
-    renderGallery();
+const OWNER='wondol2g-art', REPO='wons-archive';
+const EXT=/\.(jpe?g|png|webp|gif|avif)$/i;
+let photos=[...originalPhotos], visible=[...photos], selected='ALL', activeIndex=0;
+const gallery=document.getElementById('gallery'), filters=document.getElementById('filters');
+const box=document.getElementById('lightbox'), boxImage=document.getElementById('lightboxImage'), boxCaption=document.getElementById('lightboxCaption');
+const known=new Map(originalPhotos.map(p=>[p.src.toLowerCase(),p]));
+const categories=['ALL','LIGHT & SHADOW','CITY & MOMENTS','LANDSCAPE','TRAVEL & PLACES','NEW PHOTOGRAPHS'];
+function draw(){
+  const available=categories.filter(c=>c==='ALL'||photos.some(p=>p.category===c));
+  if(!available.includes(selected))selected='ALL';
+  filters.replaceChildren();
+  for(const c of available){const b=document.createElement('button');b.type='button';b.className='filter'+(c===selected?' active':'');b.textContent=c;b.setAttribute('aria-pressed',String(c===selected));b.addEventListener('click',()=>{selected=c;draw()});filters.append(b)}
+  visible=selected==='ALL'?photos:photos.filter(p=>p.category===selected);
+  gallery.replaceChildren();
+  visible.forEach((p,i)=>{
+    const card=document.createElement('article');card.className='photo-card '+(i%7===0?'full':i%7===1?'wide':i%7===2?'narrow':'');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',p.title+' 크게 보기');
+    const visual=document.createElement('div');visual.className='photo-visual';const img=document.createElement('img');img.src=p.src;img.alt=p.title;img.loading='lazy';img.decoding='async';visual.append(img);
+    const meta=document.createElement('div');meta.className='photo-meta';const title=document.createElement('span');title.className='photo-title';title.textContent=String(i+1).padStart(2,'0')+' / '+p.title;const cat=document.createElement('span');cat.className='photo-category';cat.textContent=p.category;meta.append(title,cat);card.append(visual,meta);
+    card.addEventListener('click',()=>openBox(i));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openBox(i)}});gallery.append(card)
   });
-  filters.appendChild(button);
-});
-function renderGallery() {
- gallery.replaceChildren();
- visiblePhotos.forEach((photo, index) => {
-  const button = document.createElement("button");
-  button.className = "photo-card";
-  button.type = "button";
-  button.innerHTML = `
-    <span class="photo-frame"><img src="${photo.src}" alt="${photo.title}" loading="lazy"></span>
-    <span class="photo-meta"><span class="photo-title">${photo.title}</span><span class="photo-location">${photo.location}</span></span>`;
-  button.addEventListener("click", () => openPhoto(index));
-  gallery.appendChild(button);
- });
+  document.getElementById('photoCount').textContent=photos.length+' FRAMES';
 }
-
-function openPhoto(index) {
-  current = (index + visiblePhotos.length) % visiblePhotos.length;
-  const photo = visiblePhotos[current];
-  lightbox.querySelector("img").src = photo.src;
-  lightbox.querySelector("img").alt = photo.title;
-  lightbox.querySelector("figcaption").textContent = `${photo.title} — ${photo.location}`;
-  if (!lightbox.open) lightbox.showModal();
+function openBox(i){activeIndex=i;const p=visible[i];boxImage.src=p.src;boxImage.alt=p.title;boxCaption.textContent=`${i+1} / ${visible.length} — ${p.title}`;box.hidden=false;document.body.style.overflow='hidden'}
+function closeBox(){box.hidden=true;document.body.style.overflow='';boxImage.removeAttribute('src')}
+function moveBox(delta){if(!visible.length)return;openBox((activeIndex+delta+visible.length)%visible.length)}
+document.getElementById('closeLightbox').addEventListener('click',closeBox);
+document.getElementById('prevPhoto').addEventListener('click',()=>moveBox(-1));
+document.getElementById('nextPhoto').addEventListener('click',()=>moveBox(1));
+box.addEventListener('click',e=>{if(e.target===box)closeBox()});
+document.addEventListener('keydown',e=>{if(box.hidden)return;if(e.key==='Escape')closeBox();if(e.key==='ArrowRight')moveBox(1);if(e.key==='ArrowLeft')moveBox(-1)});
+async function refreshPhotos(){
+  try{
+    const res=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/images?ref=main`,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+    if(!res.ok)throw new Error('GitHub API '+res.status);
+    const entries=await res.json();if(!Array.isArray(entries))throw new Error('Unexpected response');
+    const found=entries.filter(e=>e.type==='file'&&EXT.test(e.name)&&e.name.toLowerCase()!=='cover.png').sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true})).map(e=>{
+      const src='images/'+encodeURIComponent(e.name), existing=known.get(('images/'+e.name).toLowerCase());
+      return existing||{src,title:e.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' '),category:'NEW PHOTOGRAPHS'};
+    });
+    if(found.length){photos=found;draw()}
+  }catch(err){console.warn('GitHub 이미지 목록을 불러오지 못해 기본 사진을 표시합니다.',err)}
 }
-lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
-lightbox.querySelector(".lightbox-prev").addEventListener("click", () => openPhoto(current - 1));
-lightbox.querySelector(".lightbox-next").addEventListener("click", () => openPhoto(current + 1));
-lightbox.addEventListener("click", e => { if (e.target === lightbox) lightbox.close(); });
-document.addEventListener("keydown", e => {
-  if (!lightbox.open) return;
-  if (e.key === "ArrowLeft") openPhoto(current - 1);
-  if (e.key === "ArrowRight") openPhoto(current + 1);
-});
-document.querySelector("#year").textContent = new Date().getFullYear();
-
-const menuButton = document.querySelector(".menu-toggle");
-const nav = document.querySelector("nav");
-menuButton.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-});
-nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => nav.classList.remove("open")));
-
-renderGallery();
+draw();refreshPhotos();
