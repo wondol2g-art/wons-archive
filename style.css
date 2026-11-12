@@ -43,3 +43,16 @@
  .photo-meta,.photo-title,.photo-category{font-size:8px!important}
 }
 @media(prefers-reduced-motion:reduce){.hero-image{animation:none;transform:none}.photo-visual img{transition:none}}
+.photo-card .photo-visual {
+  height: auto !important;
+  aspect-ratio: auto !important;
+}
+
+.photo-card .photo-visual img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  position: static !important;
+}
