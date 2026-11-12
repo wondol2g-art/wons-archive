@@ -56,3 +56,30 @@
   object-fit: contain !important;
   position: static !important;
 }
+
+/* WONS ARCHIVE — 원본 사진 비율 유지 */
+.gallery .photo-card,
+.gallery .photo-card.full,
+.gallery .photo-card.wide,
+.gallery .photo-card.narrow {
+  height: auto !important;
+  align-self: start;
+}
+
+.gallery .photo-card .photo-visual {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  overflow: visible !important;
+}
+
+.gallery .photo-card .photo-visual img {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
