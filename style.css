@@ -6,7 +6,7 @@
   background: #ededed;
 }
 body {
-  --page-gutter: 50px;
+  --page-gutter: 80px;
   margin: 0;
 }
 .site-header, main {
