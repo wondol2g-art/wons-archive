@@ -1,9 +1,33 @@
-<!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#0b0c0e" name="theme-color"/><meta content="WONS ARCHIVE — A collection of light, places and fleeting moments." name="description"/><title>WONS ARCHIVE — Photography</title><link href="style.css" rel="stylesheet"/></head><body>
-
-<main id="top"><section aria-label="대표 사진" class="hero"><div class="hero-image"></div></section><header class="site-header"><a class="brand" href="#top">WONS<span>ARCHIVE</span><small>PHOTOGRAPHY</small></a><nav aria-label="주 메뉴"><a href="#works">WORKS</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></nav><span class="header-index">EST. 2026   /   KOREA</span></header>
-<section class="intro" id="works"><div class="section-label"><span class="dot"></span> SELECTED PHOTOGRAPHS <span id="photoCount">17 FRAMES</span></div><div class="intro-heading"><h2>Collected<br/><i>moments.</i></h2><p>일상 속 스쳐가는 풍경과 빛의 조각들.<br/>기억하고 싶은 장면들을 기록합니다.</p></div><div aria-label="사진 분류" class="filters" id="filters"></div><div class="gallery" id="gallery"></div><p class="gallery-note">END OF COLLECTION <span>✳</span> MORE TO COME</p></section>
-<section class="about" id="about"><div class="about-label">02 / ABOUT THE ARCHIVE</div><div><span class="eyebrow">THE STORY BEHIND THE FRAMES</span><h2>Finding beauty<br/>in the <em>ordinary.</em></h2><p>WONS ARCHIVE는 지나치는 순간을 오래 바라보는 사진 기록입니다. 낯선 도시, 익숙한 길, 하루의 마지막 빛까지. 작은 장면들이 모여 하나의 이야기가 됩니다.</p><span class="signature">WONS ARCHIVE © 2026</span></div></section>
-<footer id="contact"><a class="footer-brand" href="#top">WONS ARCHIVE <span>↗</span></a><div><span>PHOTOGRAPHY / PERSONAL ARCHIVE</span><span>MADE TO REMEMBER.</span></div></footer></main>
-<div aria-label="사진 크게 보기" aria-modal="true" class="lightbox" hidden="" id="lightbox" role="dialog"><button aria-label="닫기" class="lightbox-close" id="closeLightbox">×</button><button aria-label="이전 사진" class="lightbox-prev" id="prevPhoto">←</button><img alt="" id="lightboxImage"/><button aria-label="다음 사진" class="lightbox-next" id="nextPhoto">→</button><div class="lightbox-caption" id="lightboxCaption"></div></div>
-<script defer="" src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="WONS ARCHIVE photography portfolio">
+  <title>WONS ARCHIVE</title>
+  <link rel="stylesheet" href="style.css?v=10">
+  <script src="script.js?v=8" defer></script>
+</head>
+<body>
+  <header id="top" class="site-header">
+    <h1>WONS ARCHIVE</h1>
+    <nav id="filters" class="filters" aria-label="Photo categories"></nav>
+  </header>
+  <main id="works" aria-label="Gallery">
+    <div id="gallery" class="gallery"></div>
+    <noscript>Enable JavaScript to view the gallery.</noscript>
+  </main>
+  <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+    <button class="lightbox-close" id="closeLightbox" aria-label="Close" autofocus>×</button>
+    <div class="lightbox-content">
+      <button id="prevPhoto" aria-label="Previous photo">←</button>
+      <figure>
+        <img id="lightboxImage" alt="">
+        <figcaption id="lightboxCaption"></figcaption>
+      </figure>
+      <button id="nextPhoto" aria-label="Next photo">→</button>
+    </div>
+  </dialog>
+</body>
+</html>
