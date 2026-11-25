@@ -168,6 +168,10 @@ function draw() {
   );
   if (!available.some(([category]) => category === selected)) selected = 'ALL';
 
+  const galleryTitle = document.getElementById('galleryTitle');
+  const title = categories.get(selected);
+  if (galleryTitle.textContent !== title) galleryTitle.textContent = title;
+
   const restoreFilterFocus = filters.contains(document.activeElement);
   filters.replaceChildren();
   for (const [category, label] of available) {

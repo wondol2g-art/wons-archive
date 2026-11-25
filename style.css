@@ -50,10 +50,18 @@ button {
   text-underline-offset: .3em;
 }
 main { min-width: 0; }
-.gallery { padding-inline-end: 26px; }
+main { padding-inline-end: 50px; }
+.gallery-title {
+  display: flex;
+  align-items: center;
+  min-height: 150px;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 500;
+}
 .gallery, .photo-row {
   display: grid;
-  gap: 15px;
+  gap: 17px;
 }
 .photo-row {
   grid-template-columns: var(--photo-columns, minmax(0, 1fr));
