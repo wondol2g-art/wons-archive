@@ -144,7 +144,7 @@ const OWNER='wondol2g-art', REPO='wons-archive';
 const EXT=/\.(jpe?g|png|webp|gif|avif)$/i;
 let photos = [...originalPhotos];
 let selected = 'ALL';
-const photosPerRow = 2;
+const photosPerRow = 3;
 let lightboxPhotos = [];
 let activeIndex = 0;
 const gallery = document.getElementById('gallery');
@@ -154,12 +154,12 @@ const boxImage = document.getElementById('lightboxImage');
 const boxCaption = document.getElementById('lightboxCaption');
 const known = new Map(originalPhotos.map(photo => [photo.src.toLowerCase(), photo]));
 const categories = new Map([
-  ['ALL', 'All Work'],
-  ['LIGHT & SHADOW', 'Light & Shadow'],
-  ['CITY & MOMENTS', 'City & Moments'],
-  ['LANDSCAPE', 'Landscape'],
-  ['TRAVEL & PLACES', 'Travel & Places'],
-  ['NEW PHOTOGRAPHS', 'New Photographs'],
+  ["ALL", "All Work"],
+  ["LIGHT & SHADOW", "Light & Shadow"],
+  ["CITY & MOMENTS", "City & Moments"],
+  ["LANDSCAPE", "Landscape"],
+  ["TRAVEL & PLACES", "Travel & Places"],
+  ["NEW PHOTOGRAPHS", "New Photographs"],
 ]);
 
 function draw() {
@@ -169,8 +169,8 @@ function draw() {
   if (!available.some(([category]) => category === selected)) selected = 'ALL';
 
   const galleryTitle = document.getElementById('galleryTitle');
-  const title = categories.get(selected);
-  if (galleryTitle.textContent !== title) galleryTitle.textContent = title;
+  const label = categories.get(selected);
+  if (galleryTitle.textContent !== label) galleryTitle.textContent = label;
 
   const restoreFilterFocus = filters.contains(document.activeElement);
   filters.replaceChildren();
@@ -191,26 +191,11 @@ function draw() {
   }
 
   const visible = selected === 'ALL' ? photos : photos.filter(photo => photo.category === selected);
-  const groups = new Map();
-  for (const photo of visible) {
-    const orientation = Math.sign(photo.width - photo.height);
-    if (!groups.has(orientation)) groups.set(orientation, []);
-    groups.get(orientation).push(photo);
-  }
-  const rows = [];
-  for (const group of groups.values()) {
-    for (let start = 0; start < group.length; start += photosPerRow) {
-      rows.push(group.slice(start, start + photosPerRow));
-    }
-  }
-  const orderedPhotos = rows.flat();
   gallery.replaceChildren();
-  let offset = 0;
-  for (const rowPhotos of rows) {
+  for (let start = 0; start < visible.length; start += photosPerRow) {
+    const rowPhotos = visible.slice(start, start + photosPerRow);
     const row = document.createElement('div');
     row.className = 'photo-row';
-    const start = offset;
-    offset += rowPhotos.length;
     const ratios = rowPhotos.map(photo => photo.width && photo.height ? photo.width / photo.height : 1);
     const sizeColumns = () => {
       row.style.setProperty('--photo-columns', ratios.map(ratio => `minmax(0, ${ratio}fr)`).join(' '));
@@ -236,7 +221,7 @@ function draw() {
       }
       card.append(image);
       card.addEventListener('click', () => {
-        lightboxPhotos = orderedPhotos;
+        lightboxPhotos = visible;
         showPhoto(start + index);
         box.showModal();
         document.body.style.overflow = 'hidden';
