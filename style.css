@@ -7,7 +7,7 @@
 }
 body {
   display: grid;
-  grid-template-columns: clamp(160px, 16vw, 224px) minmax(0, 1fr);
+  grid-template-columns: clamp(184px, 18vw, 256px) minmax(0, 1fr);
   margin: 0;
 }
 .site-header {
@@ -42,7 +42,7 @@ button {
   background: transparent;
   color: #645d52;
   text-align: left;
-  font-size: .875rem;
+  font-size: .9375rem;
 }
 .filter:hover, .filter.active {
   color: #26231f;
