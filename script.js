@@ -6,7 +6,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "A moment of stillness",
     "location": "LIGHT & SHADOW",
-    "category": "LIGHT & SHADOW"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-02.webp",
@@ -14,7 +14,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Quiet arches",
     "location": "LIGHT & SHADOW",
-    "category": "LIGHT & SHADOW"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-03.webp",
@@ -22,7 +22,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Where light falls",
     "location": "LIGHT & SHADOW",
-    "category": "LIGHT & SHADOW"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-04.webp",
@@ -30,7 +30,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "After the rain",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-05.webp",
@@ -38,7 +38,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Autumn layers",
     "location": "TRAVEL & PLACES",
-    "category": "TRAVEL & PLACES"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-06.webp",
@@ -46,7 +46,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Evening traffic",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-07.webp",
@@ -54,7 +54,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Soft skyline",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-08.webp",
@@ -62,7 +62,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Passing by",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-09.webp",
@@ -70,7 +70,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Night traces",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-10.webp",
@@ -78,7 +78,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Across the walkway",
     "location": "CITY & MOMENTS",
-    "category": "CITY & MOMENTS"
+    "category": "STREET"
   },
   {
     "src": "images/photo-11.webp",
@@ -86,7 +86,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Under autumn leaves",
     "location": "TRAVEL & PLACES",
-    "category": "TRAVEL & PLACES"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-12.webp",
@@ -94,7 +94,7 @@ const originalPhotos = [
     "height": 1266,
     "title": "A place to rest",
     "location": "TRAVEL & PLACES",
-    "category": "TRAVEL & PLACES"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-13.webp",
@@ -102,7 +102,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "Water and wood",
     "location": "TRAVEL & PLACES",
-    "category": "TRAVEL & PLACES"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-14.webp",
@@ -110,7 +110,7 @@ const originalPhotos = [
     "height": 1900,
     "title": "By the water",
     "location": "LANDSCAPE",
-    "category": "LANDSCAPE"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-15.webp",
@@ -118,7 +118,7 @@ const originalPhotos = [
     "height": 1424,
     "title": "Above the wires",
     "location": "LANDSCAPE",
-    "category": "LANDSCAPE"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-16.webp",
@@ -126,7 +126,7 @@ const originalPhotos = [
     "height": 1266,
     "title": "Open skies",
     "location": "LANDSCAPE",
-    "category": "LANDSCAPE"
+    "category": "PLACES"
   },
   {
     "src": "images/photo-17.webp",
@@ -134,7 +134,7 @@ const originalPhotos = [
     "height": 1266,
     "title": "Summer hillside",
     "location": "LANDSCAPE",
-    "category": "LANDSCAPE"
+    "category": "PLACES"
   }
 ];
 
@@ -154,12 +154,9 @@ const boxImage = document.getElementById('lightboxImage');
 const boxCaption = document.getElementById('lightboxCaption');
 const known = new Map(originalPhotos.map(photo => [photo.src.toLowerCase(), photo]));
 const categories = new Map([
-  ["ALL", "All Work"],
-  ["LIGHT & SHADOW", "Light & Shadow"],
-  ["CITY & MOMENTS", "City & Moments"],
-  ["LANDSCAPE", "Landscape"],
-  ["TRAVEL & PLACES", "Travel & Places"],
-  ["NEW PHOTOGRAPHS", "New Photographs"],
+  ['ALL', 'All Work'],
+  ['STREET', 'Street'],
+  ['PLACES', 'Places'],
 ]);
 
 function draw() {
@@ -282,7 +279,7 @@ async function refreshPhotos(){
     const entries=await res.json();if(!Array.isArray(entries))throw new Error('Unexpected response');
     const found=entries.filter(e=>e.type==='file'&&EXT.test(e.name)&&e.name.toLowerCase()!=='cover.png').sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true})).map(e=>{
       const src='images/'+encodeURIComponent(e.name), existing=known.get(('images/'+e.name).toLowerCase());
-      return existing||{src,title:e.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' '),category:'NEW PHOTOGRAPHS'};
+      return existing||{src,title:e.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ')};
     });
     if(found.length){photos=await Promise.all(found.map(measurePhoto));draw()}
   }catch(err){console.warn('Could not load the GitHub collection. Showing the included photos.',err)}
