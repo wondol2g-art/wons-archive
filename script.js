@@ -192,8 +192,13 @@ function draw() {
 
   const visible = selected === 'ALL' ? photos : photos.filter(photo => photo.category === selected);
   gallery.replaceChildren();
-  for (let start = 0; start < visible.length; start += photosPerRow) {
-    const rowPhotos = visible.slice(start, start + photosPerRow);
+  let nextPhotoIndex = 0;
+  while (nextPhotoIndex < visible.length) {
+    const start = nextPhotoIndex;
+    const candidates = visible.slice(start, start + photosPerRow);
+    const hasLandscape = candidates.some(photo => photo.width > photo.height);
+    const rowPhotos = hasLandscape ? candidates.slice(0, 2) : candidates;
+    nextPhotoIndex += rowPhotos.length;
     const row = document.createElement('div');
     row.className = 'photo-row';
     const ratios = rowPhotos.map(photo => photo.width && photo.height ? photo.width / photo.height : 1);
