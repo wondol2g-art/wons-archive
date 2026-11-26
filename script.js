@@ -135,6 +135,167 @@ const originalPhotos = [
     "title": "Summer hillside",
     "location": "LANDSCAPE",
     "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-0204.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Light on Brick",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-1209.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Crossing Paths",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-1368.webp",
+    "width": 1638,
+    "height": 2048,
+    "title": "Lakeside Light",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-1468.webp",
+    "width": 1109,
+    "height": 1386,
+    "title": "By the Railing",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-1922.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Ferris Wheel Reflection",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-2178.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Bridge Under Clouds",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-3071.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Umbrellas on the Walkway",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-5231.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Stepping Stones",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-5843.webp",
+    "width": 2048,
+    "height": 1638,
+    "title": "City at Dusk",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-6079.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "A Ride by the Fountain",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-6758.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Bicycle in the Alley",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-6891.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Two Ducks",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-7063.webp",
+    "width": 1638,
+    "height": 2048,
+    "title": "Across the Stream",
+    "category": "STREET"
+  },
+  {
+    "src": "images/dsc-7524.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Among Autumn Trees",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-7661.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "The Red Clearing",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-7734.webp",
+    "width": 1365,
+    "height": 2048,
+    "title": "Gold on Water",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-7786.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Leaves in Sunlight",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-7910.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "An Autumn Afternoon",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-8434.webp",
+    "width": 2048,
+    "height": 1536,
+    "title": "Fountain Figures",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-8505.webp",
+    "width": 2048,
+    "height": 1536,
+    "title": "Water on the Steps",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-9449.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Fireworks over the Pavilion",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-9577-01.webp",
+    "width": 1638,
+    "height": 2048,
+    "title": "Fireworks Reflected on the Water",
+    "category": "PLACES"
+  },
+  {
+    "src": "images/dsc-9987.webp",
+    "width": 2048,
+    "height": 1365,
+    "title": "Red Brick Steeple",
+    "category": "PLACES"
   }
 ];
 
@@ -284,4 +445,5 @@ async function refreshPhotos(){
     if(found.length){photos=await Promise.all(found.map(measurePhoto));draw()}
   }catch(err){console.warn('Could not load the GitHub collection. Showing the included photos.',err)}
 }
-draw();refreshPhotos();
+draw();
+if (window.location.protocol !== "file:") refreshPhotos();
